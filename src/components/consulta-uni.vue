@@ -39,6 +39,7 @@
     <form @submit.prevent="submit">
       <div class="grid   gap-6 mb-6  max-w-2xl m-2 md:mx-auto  lg:mx-auto my-12 ">
         
+        
 
         <div >
           <label
@@ -86,7 +87,7 @@
       <td class="border_manual_spacing" > {{ user.content.name }} </td>
       <td> {{ user.content.document }} </td>
       <td> {{ user.content.situation }} </td>
-      <td class="items-center p-2 "><button class=" sm:m-1 md:m-1 lg:m-1 m-1   text-white bg-cyan-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500" >Editar</button> <button class=" sm:m-1 md:m-1 lg:m-1 m-1 text-white  hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-red-600 hover:bg-red-500 " @click.prevent="deletarId(user.id)">Deletar</button></td>
+      <td class="items-center p-2 "><v-btn class=" sm:m-1 md:m-1 lg:m-1 m-1 colors1   text-white hover:bg-cyan-500 bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  hover:bg-cyan-500 focus:ring-blue-500" @click.prevent="openModal = true" >Editar</v-btn> <v-btn class=" colors2 sm:m-1 md:m-1 lg:m-1 m-1 text-white  hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-red-600 hover:bg-red-500 " @click.prevent="deletarId(user.id)">Deletar</v-btn></td>
     
     </tr>
     
@@ -95,6 +96,226 @@
 </table>
 
   </div>
+
+  
+  <Teleport to="body" >
+  <div v-if="openModal" class="modal">
+
+    <div v-if="openModalzinho" class="text-center modalzinho m-auto alert " >
+      <v-card 
+      class="justify-center  modalzinho-table lg:mx-auto md:mx-auto mt-52"
+      type="success">Deseja alterar este cadastro?
+      <div>
+        <v-btn
+        @click.prevent="buttonOpen"
+        class="m-4"
+        >
+        sim
+        </v-btn>
+        <v-btn
+        @click.prevent="deniedButton"
+        class="m-4"
+        >
+
+        não
+        </v-btn>
+     </div> </v-card >
+     
+    </div>
+    
+    
+      <div class="modal-table lg:mx-auto md:mx-auto mt-10  ">
+
+        
+      
+        <form @submit.prevent="submit" v-for="(user, index) in usuarios" :key="index"  >
+    <div class="grid gap-6 mb-6 lg:grid-cols-2">
+        
+        <div>
+            <label for="first_name" class="block mb-2 text-sm font-medium font-type">Nome Completo</label>
+            <input 
+            type="text"
+            v-model="user.content.name" id="first_name" 
+            :disabled=!isDisabled
+            :class="{ active: !isDisabled}"
+            class="input_type  text-sm rounded-lg    block w-full p-2.5 " 
+            placeholder="digite seu nome" >
+        </div>
+        <div class="flex">
+        <div>
+            <label for="last_name" class="block mb-2 text-sm font-medium font-type ">Data de nascimento</label>
+            <input 
+             type="date"
+             v-model="user.content.data_nascimento" id="last_name" 
+             :disabled=!isDisabled
+             :class="{ active: !isDisabled}"
+             class="  input_type1  text-sm rounded-lg   block w-full p-2.5 " placeholder=" Nascimento "
+              >
+
+        </div>
+        <div>
+            <label for="sex" class="block mb-2 text-sm font-medium font-type">Sexo</label>
+            <select 
+             name="sex"
+             id="sex"
+             class="select_input" 
+             :disabled=!isDisabled
+             :class="{ active: !isDisabled}"
+             v-model="user.content.sex" >
+              
+              
+              <option>Masculino</option>
+              <option>Feminino</option>
+            
+            </select>
+            
+            
+        </div>
+        <div class="close-circle" @click.prevent="openModal= false">
+          <v-icon  >mdi-36px mdi-close-circle </v-icon>
+        </div>
+        </div>
+        <div>
+            <label for="company" class="block mb-2 text-sm font-medium font-type ">Documento</label>
+            <input 
+            type="text" 
+            v-model="user.content.document" id="company" 
+            :disabled=!isDisabled
+            :class="{ active: !isDisabled}"
+            class="input_type   text-sm  block w-full p-2.5 " 
+            placeholder="digite um documento válido" >
+        </div>  
+        <div>
+            <label for="phone" class="block mb-2 text-sm font-medium font-type">Cel</label>
+            <input 
+            type="tel" 
+            v-model="user.content.phone" 
+            id="phone"
+            :disabled=!isDisabled
+            :class="{ active: !isDisabled}"
+            class="input_type  block w-full p-2.5 " placeholder="(xx) xxxx-xxxx "  >
+        </div>
+        <div>
+            <label for="mail" class="block mb-2 text-sm font-medium font-type">E-mail</label>
+            <input type="email"
+             v-model="user.content.email"
+              id="mail"
+              :disabled=!isDisabled
+              :class="{ active: !isDisabled}"
+              class="input_type  text-gray-900 text-sm rounded-lg focus:ring-cyan-300 focus:border-cyan-300 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-300 dark:focus:border-cyan-300" placeholder="examplo@digite.com" >
+        </div>
+        
+  <div>
+      
+      <label for="website" class="block mb-2 text-sm font-medium font-type">Situação</label>
+      <div class="flex">
+      <div class="form-check">
+     
+      <input 
+      class="form-check-input  rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-300 checked:border-cyan-300 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" 
+      type="radio" 
+      name="flexRadioDefault" 
+      id="ativo" value="ATIVO"
+      :disabled=!isDisabled
+      :class="{ active: !isDisabled}"
+      v-model="user.content.situation">
+      <label class="form-check-label inline-block text-gray-800" for="ativo">
+        Ativo
+      </label>
+  </div>
+    <div class="form-check">
+      <!-- <input class="bg:cyan-300" type="radio" id="two" value="INATIVO" v-model="usuario.situation">
+      <label for="two">INATIVO</label> -->
+      <input 
+       class="form-check-input  rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-300 checked:border-cyan-300 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+       type="radio" 
+       name="flexRadioDefault"
+       id="inativo"
+       :disabled=!isDisabled
+       :class="{ active: !isDisabled}"
+       value="INATIVO"  
+       v-model="user.content.situation" >
+      <label class="form-check-label inline-block text-gray-800" for="inativo">
+       Inativo
+      </label>
+    </div>
+    </div>
+  </div>
+
+    </div>
+    
+    <div class="grid gap-6 mb-10 lg:grid-cols-2  ">
+    
+    <div class="mb-6">
+        <label for="plano" class="block mb-2 text-sm font-medium font-type">Tipo de Plano</label>
+        <input 
+        type="text"
+         v-model="user.content.plan"
+         id="plano"
+         :disabled=!isDisabled
+         :class="{ active: !isDisabled}"
+         class="input_type  text-gray-900 text-sm rounded-lg focus:ring-cyan-300 focus:border-cyan-300 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-300 dark:focus:border-cyan-300" placeholder="superclass"  >
+    </div> 
+    <div>
+        <label for="city" class="block mb-2 text-sm font-medium font-type">Cidade</label>
+        <input 
+        type="text" 
+        v-model="user.content.city" 
+        id="city"
+        :disabled=!isDisabled
+        :class="{ active: !isDisabled}"
+        class="  input_type1  text-gray-900 text-sm rounded-lg  block w-full p-2.5 " 
+        placeholder=" Cuiabá " >
+
+    </div>
+
+    <div>
+        <label for="accommodation" class="block mb-2 text-sm font-medium font-type ">Acomodação</label>
+        <select 
+         name="sex"
+         id="sex"
+         :disabled= isDisabled
+         :class="{ active: !isDisabled}"
+         class="select_input"
+         v-model="user.content.accommodation">
+          
+              <option>Apartamento</option>
+              <option>Enfermaria</option>
+            
+            </select>
+            
+   
+    </div>
+
+
+
+
+    </div>
+    
+    
+    
+    <div class="text-center">
+    <v-btn type="submit" class="sm:m-1 colors1 md:m-1 lg:m-4 m-1   text-white bg-cyan-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500" @click.prevent="openModalzinho = !openModalzinho">Alterar</v-btn>
+    <v-btn 
+    
+    class="sm:m-1 disabled md:m-1 lg:m-1 m-1 colors1   text-white bg-cyan-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500"
+    :class="{ active1: !isDisabled}"
+    
+    
+    >Salvar</v-btn>
+  </div>
+</form>
+      
+      
+    </div>
+       
+  
+
+    </div>
+</Teleport>
+
+     
+      
 
  
 </template>
@@ -108,7 +329,11 @@ export default {
   data() {
     return {
 
+      openModal: false,
       
+      isDisabled: '',
+
+      openModalzinho: false,
 
       user: {
 
@@ -144,9 +369,13 @@ export default {
       },
 
      msgBind: '',
+     
       
     }
   },
+
+ 
+  
 
  
   methods: {
@@ -209,6 +438,13 @@ export default {
 
     goExit() {   this.msgBind = ''},
 
+    buttonOpen() { return this.isDisabled = true, this.openModalzinho = false
+       },
+
+    
+
+    deniedButton(){ return this.isDisabled= '', this.openModalzinho = false},
+
 
     deletarId(id){
 
@@ -217,7 +453,13 @@ export default {
        this.submit()
 
       
-    }
+
+      
+    },
+
+   
+
+    
      
     
   }
@@ -240,6 +482,149 @@ export default {
 
 
 <style scoped>
+
+.colors1{
+
+  background: #63e1fd;
+}
+
+.colors2{
+  background: red;
+}
+
+
+.active{
+
+  color: #333333;
+  opacity: 0.5;
+}
+
+.active1{
+
+  color: black;
+
+}
+
+
+
+.close-circle{
+
+ 
+  cursor: pointer;
+  margin-top: 0px;
+  margin-left: 40px;
+  color:  #63e1fd;
+
+  
+  
+  
+}
+
+.font-type{
+font-family: Quicksand;
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 26px;
+
+/* identical to box height, or 162% */
+
+color: #333333;
+}
+
+.modal-table{
+
+  background: #FFFFFF;
+  border-radius: 20px;
+  
+  width: 823px;
+  height: 650px;
+ 
+  
+  padding: 1.7%;
+  
+}
+
+.form-check{
+
+padding-left: 45px;
+}
+
+.input_type1:focus {
+  outline: none !important;
+  border-color: #63e1fd;
+  box-shadow: 0 0 10px #63e1fd;
+}
+.select_input{
+  background: #F0F5F7;
+  border-radius: 10px;
+  width: 120px;
+  height: 45px;
+  color: #333333;
+  
+  
+}
+
+.select_input:focus {
+  outline: none !important;
+  border-color: #63e1fd;
+  box-shadow: 0 0 10px #63e1fd;
+}
+
+.input_type1{
+  background: #F0F5F7;
+  border-radius: 10px;
+  width: 150px;
+  height: 45px;
+  margin-right: 34px;
+  color: #333333;
+}
+
+.modal {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+ 
+ 
+
+}
+
+.modalzinho-table{
+
+  background: #FFFFFF;
+  border-radius: 20px;
+  
+  width: 250px;
+  height: 125px;
+ 
+  
+  padding: 0.7%;
+
+}
+
+.modalzinho{
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 1s ease;
+}
+
+
 
 .input_type{
   
@@ -306,6 +691,8 @@ font-weight: 300;
 font-size: 16px;
 line-height: 26px;
 }
+
+
 
 
 .border_manual{

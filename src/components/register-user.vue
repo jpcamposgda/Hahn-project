@@ -1,6 +1,6 @@
 <template>
 
-<div class="m-auto alert" v-if="open"> <v-alert type="success" top> {{open}} </v-alert> </div>
+<div class="m-auto alert" v-if="open"> <v-alert type="success" top class="justify-center"> {{open}} </v-alert> </div>
 <div class="max-w-2xl  my-8 m-2 lg:mx-auto  md:mx-auto bg-white p-10 padding_responsive  shadow-lg form_register">
   <v-icon @click="goBack" class="arrow ">mdi-arrow-left</v-icon>
  
