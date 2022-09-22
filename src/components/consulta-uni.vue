@@ -108,21 +108,31 @@
       <div>
         <v-btn
         @click.prevent="buttonOpen"
-        class="m-4"
+        class="m-2"
         >
         sim
         </v-btn>
         <v-btn
         @click.prevent="deniedButton"
-        class="m-4"
+        class="m-2"
         >
 
         não
         </v-btn>
      </div> </v-card >
+
+     
+     
      
     </div>
-    
+    <div v-if="msgOk" class="text-center msgok-card  m-auto alert ">
+
+      <v-card class="justify-center  msgok-table lg:mx-auto md:mx-auto mt-52"
+      type="success">Cadastro Alterado com sucesso!
+      <v-btn @click.prevent="msgOk = !msgOk" class="mt-3" >OK</v-btn>
+      </v-card>
+
+</div>
     
       <div class="modal-table lg:mx-auto md:mx-auto mt-10  ">
 
@@ -274,7 +284,7 @@
         <select 
          name="sex"
          id="sex"
-         :disabled= isDisabled
+         :disabled= !isDisabled
          :class="{ active: !isDisabled}"
          class="select_input"
          v-model="user.content.accommodation">
@@ -301,7 +311,7 @@
     class="sm:m-1 disabled md:m-1 lg:m-1 m-1 colors1   text-white bg-cyan-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500"
     :class="{ active1: !isDisabled}"
     
-    
+    @click.prevent="updateUser(user.id, user.content)"
     >Salvar</v-btn>
   </div>
 </form>
@@ -323,7 +333,7 @@
 <script>
 import { db } from '@/firebase'
 
-import { collection, deleteDoc, doc,  documentId,  getDoc,  getDocs, query, where } from 'firebase/firestore'
+import { collection, deleteDoc, doc, updateDoc  ,  getDoc,  getDocs, query, where } from 'firebase/firestore'
 
 export default {
   data() {
@@ -334,6 +344,8 @@ export default {
       isDisabled: '',
 
       openModalzinho: false,
+
+      msgOk: false,
 
       user: {
 
@@ -457,6 +469,22 @@ export default {
       
     },
 
+    updateUser(id, user)  {
+
+      if(!this.isDisabled) return undefined
+
+       const userscollection = doc(db, 'register', id)
+
+      updateDoc(userscollection,user)
+
+      this.msgOk = true
+      
+      this.deniedButton()
+      
+    
+
+    }
+
    
 
     
@@ -545,6 +573,32 @@ color: #333333;
   
 }
 
+.msgok-card{
+
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+
+}
+
+.msgok-table{
+
+  background: #FFFFFF;
+  border-radius: 20px;
+  
+  width: 300px;
+  height: 125px;
+ 
+  
+  padding: 1.7%;
+
+}
+
 .form-check{
 
 padding-left: 45px;
@@ -599,7 +653,7 @@ padding-left: 45px;
   background: #FFFFFF;
   border-radius: 20px;
   
-  width: 250px;
+  width: 300px;
   height: 125px;
  
   
