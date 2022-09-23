@@ -134,21 +134,21 @@
 
 </div>
     
-      <div class="modal-table lg:mx-auto md:mx-auto mt-10  ">
+      <div class="modal-table flex flex-col-2  gap-6 mb-6  max-w-2xl m-2 lg:mx-auto md:mx-auto mt-10     ">
 
         
       
-        <form @submit.prevent="submit" v-for="(user, index) in usuarios" :key="index"  >
-    <div class="grid gap-6 mb-6 lg:grid-cols-2">
+      <form @submit.prevent="submit" v-for="(user, index) in usuarios" :key="index"  >
+    <div class="  lg:mb-6 sm:flex sm:mb-6   ">
         
-        <div>
-            <label for="first_name" class="block mb-2 text-sm font-medium font-type">Nome Completo</label>
+        <div class="sm:mx-3 mt-2">
+            <label for="first_name" class="block mb-2  text-sm font-medium font-type">Nome Completo</label>
             <input 
             type="text"
             v-model="user.content.name" id="first_name" 
             :disabled=!isDisabled
             :class="{ active: !isDisabled}"
-            class="input_type  text-sm rounded-lg    block w-full p-2.5 " 
+            class="input_type   text-sm rounded-lg    block w-full p-2.5 " 
             placeholder="digite seu nome" >
         </div>
         <div class="flex">
@@ -181,11 +181,13 @@
             
             
         </div>
-        <div class="close-circle" @click.prevent="openModal= false">
+        <div class="close-circle close-circle-responsive" @click.prevent="openModal= false">
           <v-icon  >mdi-36px mdi-close-circle </v-icon>
         </div>
         </div>
-        <div>
+        </div>
+        <div class="flex mb-6 sm:mb-6 ">
+          <div class="sm:mx-3 mr-3">
             <label for="company" class="block mb-2 text-sm font-medium font-type ">Documento</label>
             <input 
             type="text" 
@@ -194,8 +196,9 @@
             :class="{ active: !isDisabled}"
             class="input_type   text-sm  block w-full p-2.5 " 
             placeholder="digite um documento válido" >
-        </div>  
-        <div>
+          </div>
+           
+        <div class="sm:ml-10">
             <label for="phone" class="block mb-2 text-sm font-medium font-type">Cel</label>
             <input 
             type="tel" 
@@ -205,6 +208,8 @@
             :class="{ active: !isDisabled}"
             class="input_type  block w-full p-2.5 " placeholder="(xx) xxxx-xxxx "  >
         </div>
+      </div> 
+      <div class="flex sm:mx-3 sm:mb-6">
         <div>
             <label for="mail" class="block mb-2 text-sm font-medium font-type">E-mail</label>
             <input type="email"
@@ -214,8 +219,9 @@
               :class="{ active: !isDisabled}"
               class="input_type  text-gray-900 text-sm rounded-lg focus:ring-cyan-300 focus:border-cyan-300 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-300 dark:focus:border-cyan-300" placeholder="examplo@digite.com" >
         </div>
-        
-  <div>
+      
+  
+    <div class="sm:ml-14">
       
       <label for="website" class="block mb-2 text-sm font-medium font-type">Situação</label>
       <div class="flex">
@@ -251,12 +257,13 @@
     </div>
     </div>
   </div>
+  </div>
 
-    </div>
     
-    <div class="grid gap-6 mb-10 lg:grid-cols-2  ">
     
-    <div class="mb-6">
+    <div class="flex sm:mb-6   ">
+    
+    <div class="sm:mx-3 mr-3">
         <label for="plano" class="block mb-2 text-sm font-medium font-type">Tipo de Plano</label>
         <input 
         type="text"
@@ -266,7 +273,7 @@
          :class="{ active: !isDisabled}"
          class="input_type  text-gray-900 text-sm rounded-lg focus:ring-cyan-300 focus:border-cyan-300 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-300 dark:focus:border-cyan-300" placeholder="superclass"  >
     </div> 
-    <div>
+    <div class="sm:ml-10">
         <label for="city" class="block mb-2 text-sm font-medium font-type">Cidade</label>
         <input 
         type="text" 
@@ -278,8 +285,9 @@
         placeholder=" Cuiabá " >
 
     </div>
+  </div>
 
-    <div>
+    <div class="mx-3 sm:mb-6 ">
         <label for="accommodation" class="block mb-2 text-sm font-medium font-type ">Acomodação</label>
         <select 
          name="sex"
@@ -300,7 +308,7 @@
 
 
 
-    </div>
+  
     
     
     
@@ -540,7 +548,7 @@ export default {
  
   cursor: pointer;
   margin-top: 0px;
-  margin-left: 40px;
+  margin-left: 60px;
   color:  #63e1fd;
 
   
@@ -565,8 +573,7 @@ color: #333333;
   background: #FFFFFF;
   border-radius: 20px;
   
-  width: 823px;
-  height: 650px;
+  
  
   
   padding: 1.7%;
@@ -767,12 +774,22 @@ line-height: 26px;
   padding: 20px 0 10px 0;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 639px) {
 
 .responsive{
 
   margin: auto;
 }
+
+.close-circle-responsive{
+
+position: absolute;
+top: 50px;
+right: 25px;
+
+}
+
+
 
 .padding_responsive{
 
