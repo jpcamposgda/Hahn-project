@@ -10,10 +10,10 @@
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
           >
-            <rect width="125" height="43" fill="url(#pattern0)" />
+            <rect width="125" height="43" fill="url(#pattern1)" />
             <defs>
               <pattern
-                id="pattern0"
+                id="pattern1"
                 patternContentUnits="objectBoundingBox"
                 width="1"
                 height="1"
@@ -33,7 +33,7 @@
           </svg>
         </div>
         <div class="grid grid-col-1 justify-items-center  px-10">
-            <div><img src="../img/icone foto.png" alt="iconefoto"></div>
+            <div><img src="/img/icone foto.png" alt="iconefoto"></div>
             <span>Bem-vindo(a)!</span> 
             <span>Rafaella</span>
         </div>
