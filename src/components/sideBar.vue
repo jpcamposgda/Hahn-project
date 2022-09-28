@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-2xl invisible lg:visible lg:h-full grid grid-col-1 barralateral my-3 ml-2.5  justify-items-center shadow-2xl ">
-        <div class="mt-10 ">
+        <div class="mt-10">
             <svg
             class=""
             width="125"
