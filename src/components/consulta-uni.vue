@@ -1,5 +1,7 @@
 <template>
 
+  <SideBar/>
+
 <div class="mx-auto   alert" @click="goExit" v-if="msgBind"> <v-alert type="error" class="justify-center"> {{msgBind}} </v-alert> </div>
     <div class="flex justify-start max-w-2xl mt-14   m-14 padding_responsive lg:mx-auto  md:mx-auto bg-white  ">
       <v-icon @click="goBack" class="arrow">mdi-arrow-left</v-icon>
@@ -342,176 +344,68 @@
 import { db } from '@/firebase'
 
 import { collection, deleteDoc, doc, updateDoc  ,  getDoc,  getDocs, query, where } from 'firebase/firestore'
+import SideBar from './sideBar.vue';
 
 export default {
-  data() {
-    return {
-
-      openModal: false,
-      
-      isDisabled: '',
-
-      openModalzinho: false,
-
-      msgOk: false,
-
-      user: {
-
-        id: '',
-
-
-        content:{ name: '',
-
-        document: '',
-
-        situation: '',
-       }
-       
-        
-        
-
-        
-        
-      },
-
-      usuarios: [],
-      usuario: {
-        
-        
-
-        name: '',
-
-        document: '',
-
-        email: '',
-
-        
-      },
-
-     msgBind: '',
-     
-      
-    }
-  },
-
- 
-  
-
- 
-  methods: {
-    submit() {
-      
-      
-      this.usuarios.length = 0;
-
-      const planoref = collection(db, 'register')
-
-      const q = query(planoref, where('email', '==', this.usuario.name))
-
-      getDocs(q)
-        .then(querySnapshot => {
-
-
-          
-
-
-          querySnapshot.forEach(doc => {
-
-            
-            const todo = {
-              id: doc.id,
-              content: doc.data()
-            }
-
-           this.usuarios.push(todo) 
-
-           
-
-           
-           
-
-            
-          
-         
-            
-            
-            
-         
-            
-            
-           })
-          
-          
-
-           
-         
-        //  if( this.usuarios.length == 0 ) { this.msgBind = "error"} else { this.msgBind = ''}
-        // 
-        return this.usuarios.length == 0 ?  this.msgBind = "Não foi possivel encontrar o Cliente, digite novamente!"  : this.msgBind = ''
-        } 
-         )
-       
-   
+    data() {
+        return {
+            openModal: false,
+            isDisabled: "",
+            openModalzinho: false,
+            msgOk: false,
+            user: {
+                id: "",
+                content: { name: "", document: "", situation: "",
+                }
+            },
+            usuarios: [],
+            usuario: {
+                name: "",
+                document: "",
+                email: "",
+            },
+            msgBind: "",
+        };
     },
-
-    goBack() {   this.$router.go(-1) } ,
-
-    goExit() {   this.msgBind = ''},
-
-    buttonOpen() { return this.isDisabled = true, this.openModalzinho = false
-       },
-
-    
-
-    deniedButton(){ return this.isDisabled= '', this.openModalzinho = false},
-
-
-    deletarId(id){
-
-       deleteDoc(doc(db, 'register', id));
-
-       this.submit()
-
-      
-
-      
+    methods: {
+        submit() {
+            this.usuarios.length = 0;
+            const planoref = collection(db, "register");
+            const q = query(planoref, where("email", "==", this.usuario.name));
+            getDocs(q)
+                .then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    const todo = {
+                        id: doc.id,
+                        content: doc.data()
+                    };
+                    this.usuarios.push(todo);
+                });
+                //  if( this.usuarios.length == 0 ) { this.msgBind = "error"} else { this.msgBind = ''}
+                // 
+                return this.usuarios.length == 0 ? this.msgBind = "Não foi possivel encontrar o Cliente, digite novamente!" : this.msgBind = "";
+            });
+        },
+        goBack() { this.$router.go(-1); },
+        goExit() { this.msgBind = ""; },
+        buttonOpen() {
+            return this.isDisabled = true, this.openModalzinho = false;
+        },
+        deniedButton() { return this.isDisabled = "", this.openModalzinho = false; },
+        deletarId(id) {
+            deleteDoc(doc(db, "register", id));
+            this.submit();
+        },
+        updateUser(id, user) {
+            if (!this.isDisabled)
+                return undefined;
+            const userscollection = doc(db, "register", id);
+            updateDoc(userscollection, user);
+            this.msgOk = true;
+            this.deniedButton();
+        }
     },
-
-    updateUser(id, user)  {
-
-      if(!this.isDisabled) return undefined
-
-       const userscollection = doc(db, 'register', id)
-
-      updateDoc(userscollection,user)
-
-      this.msgOk = true
-      
-      this.deniedButton()
-      
-    
-
-    }
-
-   
-
-    
-     
-    
-  }
-        
-        
-    
-
-
-    
-
-        
-     
-    
-    
-    
-  
+    components: { SideBar }
 }
 </script>
 

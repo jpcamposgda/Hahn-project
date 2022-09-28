@@ -1,11 +1,8 @@
 <template>
-<SideBar/>
-<div class="m-auto alert" v-if="open"> <v-alert type="success" top class="justify-center"> {{open}} </v-alert> </div>
-<div class="max-w-2xl  my-8 m-2 lg:mx-auto  md:mx-auto bg-white p-10 padding_responsive  shadow-lg form_register">
-  <v-icon @click="goBack" class="arrow ">mdi-arrow-left</v-icon>
- 
- <svg
-            class="mb-4 responsive    lg:mx-0 md:mx-auto sm:mx-auto"
+    <div class="max-w-2xl invisible lg:visible lg:h-full grid grid-col-1 barralateral my-3 ml-2.5  justify-items-center shadow-2xl ">
+        <div class="mt-10 ">
+            <svg
+            class=""
             width="125"
             height="43"
             viewBox="0 0 125 43"
@@ -13,10 +10,10 @@
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
           >
-            <rect width="125" height="43" fill="url(#pattern0)" />
+            <rect width="125" height="43" fill="url(#pattern1)" />
             <defs>
               <pattern
-                id="pattern0"
+                id="pattern1"
                 patternContentUnits="objectBoundingBox"
                 width="1"
                 height="1"
@@ -34,294 +31,68 @@
               />
             </defs>
           </svg>
-	<form @submit.prevent="submit" >
-    <div class="grid gap-6 mb-6 lg:grid-cols-2">
+        </div>
+        <div class="grid grid-col-1 justify-items-center  px-10">
+            <div><img src="../img/icone foto.png" alt="iconefoto"></div>
+            <span>Bem-vindo(a)!</span> 
+            <span>Rafaella</span>
+        </div>
+        <div class="grid grid-col-1 mt-5 border-t ">
+            <v-btn class="mt-10  colors1   text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10  text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500" @click.prevent="goBack" >Home </v-btn>
+            <v-btn class="  colors1   text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10  text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500" @click.prevent="goSell">Cadastrar Venda</v-btn>
+            <v-btn class="  colors1   text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10  text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500" @click.prevent="goQuery">Consultar Venda</v-btn>
+            <v-btn class="  colors1   text-white  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10  text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500">Minhas Vendas</v-btn>
+        </div>
+
+        <div class="mt-10 " @click.prevent=""><span>Sair</span> <v-icon>mdi-logout</v-icon></div>
         
-        <div>
-            <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nome Completo</label>
-            <input type="text" v-model="usuario.name" id="first_name" class="input_type  text-sm rounded-lg    block w-full p-2.5 " placeholder="digite seu nome" required>
-        </div>
-        <div class="flex">
-        <div>
-            <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Data de nascimento</label>
-            <input type="date" v-model="usuario.data_nascimento" id="last_name" class="  input_type1  text-sm rounded-lg   block w-full p-2.5 " placeholder=" Nascimento " required>
-
-        </div>
-        <div>
-            <label for="sex" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Sexo</label>
-            <select name="sex" id="sex" class="select_input" v-model="usuario.sex">
-              
-              
-              <option>Masculino</option>
-              <option>Feminino</option>
-            
-            </select>
-            
-            
-        </div>
-        </div>
-        <div>
-            <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Documento</label>
-            <input type="text" v-model="usuario.document" id="company" class="input_type   text-sm  block w-full p-2.5 " placeholder="digite um documento válido" required>
-        </div>  
-        <div>
-            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cel</label>
-            <input type="tel" v-model="usuario.phone" id="phone" class="input_type  block w-full p-2.5 " placeholder="(xx) xxxx-xxxx "  required>
-        </div>
-        <div>
-            <label for="mail" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">E-mail</label>
-            <input type="email" v-model="usuario.email" id="mail" class="input_type border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-300 focus:border-cyan-300 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-300 dark:focus:border-cyan-300" placeholder="examplo@digite.com" required>
-        </div>
-        
-  <div>
-      
-      <label for="website" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Situação</label>
-      <div class="flex">
-      <div class="form-check">
-      <!-- <input type="radio" id="one" value="ATIVO" v-model="usuario.situation">
-      <label for="one">ATIVO</label> -->
-      <input class="form-check-input  rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-300 checked:border-cyan-300 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="ativo" value="ATIVO" v-model="usuario.situation">
-      <label class="form-check-label inline-block text-gray-800" for="ativo">
-        Ativo
-      </label>
-  </div>
-    <div class="form-check">
-      <!-- <input class="bg:cyan-300" type="radio" id="two" value="INATIVO" v-model="usuario.situation">
-      <label for="two">INATIVO</label> -->
-      <input class="form-check-input  rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-cyan-300 checked:border-cyan-300 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" name="flexRadioDefault" id="inativo" value="INATIVO"  v-model="usuario.situation" >
-      <label class="form-check-label inline-block text-gray-800" for="inativo">
-       Inativo
-      </label>
     </div>
-    </div>
-  </div>
-
-    </div>
-    
-    <div class="grid gap-6 mb-10 lg:grid-cols-2  ">
-    
-    <div class="mb-6">
-        <label for="plano" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tipo de Plano</label>
-        <input type="text" v-model="usuario.plan" id="plano" class="input_type border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-cyan-300 focus:border-cyan-300 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-cyan-300 dark:focus:border-cyan-300" placeholder="superclass"  required>
-    </div> 
-    <div>
-        <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Cidade</label>
-        <input type="text" v-model="usuario.city" id="city" class=" border input_type1  text-gray-900 text-sm rounded-lg  block w-full p-2.5 " placeholder=" Cuiabá " required>
-
-    </div>
-
-    <div>
-        <label for="accommodation" class="block mb-2 text-sm font-medium text-gray-900 ">Acomodação</label>
-        <select name="sex" id="sex" class="select_input" v-model="usuario.accommodation">
-          
-              <option>Apartamento</option>
-              <option>Enfermaria</option>
-            
-            </select>
-            
-   
-    </div>
-
-
-
-
-    </div>
-    
-    
-    
-   
-    <button type="submit" class="botaoCadastrar text-bold">Enviar</button>
-</form>
-
-
-
-</div>
-
-
-
-
-
-
-
 </template>
 
-<script>
-import { db } from '@/firebase'
 
-import { collection, addDoc } from 'firebase/firestore'
-import SideBar from './sideBar.vue'
+<script>
+import router from '@/router';
+
+
+
 
 export default {
-    data() {
-        return {
-            usuario: {
-                name: "",
-                document: "",
-                data_nascimento: "",
-                phone: "",
-                email: "",
-                situation: "",
-                plan: "",
-                city: "",
-                sex: "",
-                accommodation: "",
-            },
-            open: ""
-        };
-    },
-    methods: {
-        submit() {
-            addDoc(collection(db, "register"), this.usuario)
-                .then(docRef => {
-                console.log("Document written with ID: ", docRef.id);
-                this.usuario.accommodation = "";
-                this.usuario.city = "";
-                this.usuario.data_nascimento = "";
-                this.usuario.document = "";
-                this.usuario.email = "";
-                this.usuario.name = "";
-                this.usuario.phone = "";
-                this.usuario.plan = "";
-                this.usuario.sex = "";
-                this.usuario.situation = "";
-                this.open = "Cliente Cadastrado com sucesso!", setTimeout(() => { this.open = ""; }, 2000);
-            })
-                .catch(error => {
-                console.error("Error adding document: ", error);
-            });
-        },
-        goBack() { this.$router.go(-1); },
-    },
-    components: { SideBar }
-}
+    name: 'sidebar',
+    data () {
+      return {
 
+       
+
+      }
+
+    },
+
+    methods:{
+
+goBack() { router.push({ path: '/' })} ,
+
+goSell() { router.push({ path: '/register' })} ,
+
+goQuery() { router.push({ path: '/consulta' })} ,
+
+}
+}
 </script>
 
 <style scoped>
+.colors1{
 
-.alert{
-
-  position: fixed;
-  top: 0;
-  width: 100%;
-
-}
-
-.arrow{
-  text-align: left;
-  margin-bottom: 30px;
-  color:  #63e1fd;;
+background: #63e1fd;
 }
 
 
-.arrow:active{
-  transform: translate(0em, 0.2em);
+.barralateral{
+    position: absolute;
+    width: 270px;
+    
+    
+    background: #FFFFFF;
+    box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.16);
+    border-radius: 12px;
 }
-.modal {
-  position: fixed;
-  z-index: 999;
-  top: 20%;
-  left: 50%;
-  width: 300px;
-  margin-left: -150px;
-}
-
-.botaoCadastrar {
-  font-size: 17px;
-  padding: 0.5em 2em;
-  border: transparent;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  background: #63e1fd;
-  color: white;
-  border-radius: 4px;
-}
-
-.botaoCadastrar:hover {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(90deg, #63e1fd, rgba(0, 212, 255, 1) 100%);
-}
-
-.botaoCadastrar:active {
-  transform: translate(0em, 0.2em);
-}
-
-.form_register {
-  border: 2px solid #63e1fd;
-  border-radius: 20px;
-  
- 
-}
-
-.input_type{
-  
-  background: #F0F5F7;
-  border-radius: 10px;
-  width: 260px;
-  height: 45px;
-  margin-right: 34px;
-   color: #333333;
-
-}
-
-
-
-.input_type1{
-  background: #F0F5F7;
-  border-radius: 10px;
-  width: 150px;
-  height: 45px;
-  margin-right: 34px;
-  color: #333333;
-}
-
-.select_input{
-  background: #F0F5F7;
-  border-radius: 10px;
-  width: 120px;
-  height: 45px;
-  color: #333333;
-  
-  
-}
-
-.select_input:focus {
-  outline: none !important;
-  border-color: #63e1fd;
-  box-shadow: 0 0 10px #63e1fd;
-}
-
-.form-check{
-
-  padding-left: 45px;
-}
-
-@media (max-width: 640px) {
-
-.responsive{
-
-  margin: auto;
-}
-
-.padding_responsive{
-
-  padding: 20px;
-}
-
- }
-
-
-
-.input_type:focus {
-  outline: none !important;
-  border-color: #63e1fd;
-  box-shadow: 0 0 10px #63e1fd;
-}
-
-.input_type1:focus {
-  outline: none !important;
-  border-color: #63e1fd;
-  box-shadow: 0 0 10px #63e1fd;
-}
-
-
 </style>

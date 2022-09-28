@@ -1,4 +1,5 @@
 <template>
+     <SideBar/>
      <div class="flex flex-col">
         <label for="accommodation"  >Acomodação</label>
         <select name="sex" id="sex" v-model="jose_diego" >
@@ -32,16 +33,16 @@
 
 
 <script>
+import SideBar from "./sideBar.vue";
+
+  
+
     export default {
-  data() {
-    return {
-        jose_diego:'',
-        
-        
-    }
+    data() {
+        return {
+            jose_diego: "",
+        };
     },
-
-   
-
-    }
+    components: { SideBar }
+}
 </script>

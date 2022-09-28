@@ -44,6 +44,17 @@ const routes = [
       )
   },
 
+  {
+    path: '/sidebar',
+    name: 'sidebar',
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ '../components/sideBar.vue'
+      )
+  },
+
+  
+
 
 ]
 
