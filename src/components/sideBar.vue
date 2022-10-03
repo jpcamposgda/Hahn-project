@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-2xl invisible lg:visible lg:h-full grid grid-col-1 barralateral my-3 ml-2.5  justify-items-center shadow-2xl ">
+    <div class="max-w-2xl invisible xl:visible  lg:h-full grid grid-col-1 barralateral my-3 ml-2.5  justify-items-center shadow-2xl ">
         <div class="mt-10">
             <svg
             class=""
@@ -33,7 +33,9 @@
           </svg>
         </div>
         <div class="grid grid-col-1 justify-items-center  px-10">
-            <div><img src="/img/icone foto.png" alt="iconefoto"></div>
+            <div><img src="../img/iconefoto.png" alt="iconefoto">
+            
+            </div>
             <span>Bem-vindo(a)!</span> 
             <span>Rafaella</span>
         </div>

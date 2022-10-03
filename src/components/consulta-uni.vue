@@ -105,9 +105,9 @@
 
     <div v-if="openModalzinho" class="text-center modalzinho m-auto alert " >
       <v-card 
-      class="justify-center  modalzinho-table lg:mx-auto md:mx-auto mt-52"
+      class="justify-center  modalzinho-table mx-auto   lg:mx-auto md:mx-auto mt-52"
       type="success">Deseja alterar este cadastro?
-      <div>
+      <div class="mt-3">
         <v-btn
         @click.prevent="buttonOpen"
         class="m-2"
@@ -127,9 +127,9 @@
      
      
     </div>
-    <div v-if="msgOk" class="text-center msgok-card  m-auto alert ">
+    <div v-if="msgOk" class="text-center msgok-card  m-auto  alert ">
 
-      <v-card class="justify-center  msgok-table lg:mx-auto md:mx-auto mt-52"
+      <v-card class="justify-center  msgok-table lg:mx-auto mx-auto md:mx-auto mt-52"
       type="success">Cadastro Alterado com sucesso!
       <v-btn @click.prevent="msgOk = !msgOk" class="mt-3" >OK</v-btn>
       </v-card>
@@ -141,7 +141,7 @@
         
       
       <form @submit.prevent="submit" v-for="(user, index) in usuarios" :key="index"  >
-    <div class="  lg:mb-6 sm:flex sm:mb-6   ">
+    <div class="  lg:mb-6 sm:flex sm:mb-6 p-1   ">
         
         <div class="sm:mx-3 mt-2">
             <label for="first_name" class="block mb-2  text-sm font-medium font-type">Nome Completo</label>
@@ -315,10 +315,10 @@
     
     
     <div class="text-center">
-    <v-btn type="submit" class="sm:m-1 colors1 md:m-1 lg:m-4 m-1   text-white bg-cyan-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500" @click.prevent="openModalzinho = !openModalzinho">Alterar</v-btn>
+    <v-btn type="submit" class="sm:m-1 colors1 md:m-1 lg:m-4 m-1    text-white bg-cyan-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-4/5 sm:w-auto px-10 py-2.5 text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500" @click.prevent="openModalzinho = !openModalzinho">Alterar</v-btn>
     <v-btn 
     
-    class="sm:m-1 disabled md:m-1 lg:m-1 m-1 colors1   text-white bg-cyan-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-10 py-2.5 text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500"
+    class="sm:m-1 disabled md:m-1 lg:m-1 m-1 colors1   text-white bg-cyan-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-4/5 sm:w-auto px-10 py-2.5 text-center bg-cyan-300 hover:bg-cyan-500 focus:ring-blue-500"
     :class="{ active1: !isDisabled}"
     
     @click.prevent="updateUser(user.id, user.content)"
